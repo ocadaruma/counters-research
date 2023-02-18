@@ -1,0 +1,6 @@
+rootProject.name = 'counters-research'
+
+include ':hash'
+include ':counter'
+include ':bench'
+include ':bench-accuracy'

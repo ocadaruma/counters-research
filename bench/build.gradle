@@ -1,0 +1,8 @@
+apply plugin: 'com.github.johnrengelman.shadow'
+
+dependencies {
+    implementation project(':counter')
+    implementation project(':hash')
+    implementation 'org.openjdk.jmh:jmh-core:1.21'
+    annotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.21'
+}

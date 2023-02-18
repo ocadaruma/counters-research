@@ -1,0 +1,3 @@
+dependencies {
+    implementation 'net.openhft:zero-allocation-hashing:0.16'
+}
