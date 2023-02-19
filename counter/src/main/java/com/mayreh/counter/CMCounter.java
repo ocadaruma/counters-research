@@ -17,6 +17,14 @@ public class CMCounter implements Counter {
     private final boolean conservativeUpdate;
     private final int[] hashValueCache;
 
+    public int depth() {
+        return sketch.length;
+    }
+
+    public int width() {
+        return sketch[0].length;
+    }
+
     /**
      * Instantiates the counter which meets the error bounds.
      * @param epsilon target error rate against the total item count
@@ -25,8 +33,8 @@ public class CMCounter implements Counter {
     public CMCounter(double epsilon, double delta, boolean conservativeUpdate) {
         this.conservativeUpdate = conservativeUpdate;
 
-        int d = (int) Math.log(1 / delta);
-        int w0 = (int) (Math.E / epsilon);
+        int d = (int) Math.ceil(Math.log(1 / delta));
+        int w0 = (int) Math.ceil(Math.E / epsilon);
 
         int w = 1;
         while (w < w0) {

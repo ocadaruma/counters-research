@@ -40,8 +40,10 @@ public class AccuracyBenchmark {
 
         System.out.printf(" Total item count : %d\n", count[0]);
         System.out.printf("Unique item count : %d\n", exactCounter.table().size());
-        System.out.printf("     CountMin  Nε : %f\n", cmEpsilon * count[0]);
-        System.out.printf("     CountMin 1-δ : %f\n", 1 - cmDelta);
+        System.out.printf("   CountMin    Nε : %f\n", cmEpsilon * count[0]);
+        System.out.printf("   CountMin   1-δ : %f\n", 1 - cmDelta);
+        System.out.printf("   CountMin depth : %d\n", cmCounter.depth());
+        System.out.printf("   CountMin width : %d\n", cmCounter.width());
         System.out.printf("================================\n");
 
         int histogramBuckets = 10;
@@ -53,7 +55,7 @@ public class AccuracyBenchmark {
                 .max()
                 .getAsInt();
 
-        int bucketBound = maxFrequency / histogramBuckets;
+        int bucketBound = Math.max(maxFrequency / histogramBuckets, 1);
 
         Iterator<Entry<ByteBuffer, Integer>> entries =
                 exactCounter.table()
