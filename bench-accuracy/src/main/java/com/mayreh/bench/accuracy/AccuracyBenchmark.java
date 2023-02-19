@@ -20,14 +20,15 @@ public class AccuracyBenchmark {
     public static void main(String[] args) throws Exception {
         if (args.length < 3) {
             System.err.println("Usage: " + AccuracyBenchmark.class.getName() +
-                               " /path/to/simplewiki.xml <epsilon for CM sketch> <delta for CM sketch>");
+                               " /path/to/simplewiki.xml <epsilon for CM sketch> <delta for CM sketch> [--conservative]");
             System.exit(1);
         }
+        boolean conservative = args.length >= 4 && "--conservative".equals(args[3]);
 
         double cmEpsilon = Double.parseDouble(args[1]);
         double cmDelta = Double.parseDouble(args[2]);
         ExactCounter exactCounter = new ExactCounter();
-        CMCounter cmCounter = new CMCounter(cmEpsilon, cmDelta);
+        CMCounter cmCounter = new CMCounter(cmEpsilon, cmDelta, conservative);
 
         int[] count = new int[1];
         tokenize(args[0]).forEach(token -> {

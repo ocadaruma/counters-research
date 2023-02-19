@@ -14,13 +14,17 @@ public class CMCounter implements Counter {
     private final int[][] sketch;
     private final Hasher[] hashers;
     private final int bitMask;
+    private final boolean conservativeUpdate;
+    private final int[] hashValueCache;
 
     /**
      * Instantiates the counter which meets the error bounds.
      * @param epsilon target error rate against the total item count
      * @param delta the probability to allow the estimation to be out of error bound
      */
-    public CMCounter(double epsilon, double delta) {
+    public CMCounter(double epsilon, double delta, boolean conservativeUpdate) {
+        this.conservativeUpdate = conservativeUpdate;
+
         int d = (int) Math.log(1 / delta);
         int w0 = (int) (Math.E / epsilon);
 
@@ -35,6 +39,7 @@ public class CMCounter implements Counter {
 
         sketch = new int[d][w];
         hashers = new Hasher[d];
+        hashValueCache = new int[d];
         HashFamilies family = HashFamilies.XX3;
         for (int i = 0; i < hashers.length; i++) {
             hashers[i] = family.get();
@@ -44,12 +49,28 @@ public class CMCounter implements Counter {
     @Override
     public int incrementAndGet(byte[] input, int amount) {
         int min = Integer.MAX_VALUE;
+        if (!conservativeUpdate) {
+            for (int i = 0; i < sketch.length; i++) {
+                int r = hashers[i].hash(input, bitMask);
+                sketch[i][r] += amount;
+                min = Math.min(min, sketch[i][r]);
+            }
+            return min;
+        }
+
         for (int i = 0; i < sketch.length; i++) {
             int r = hashers[i].hash(input, bitMask);
-            sketch[i][r] += amount;
+            hashValueCache[i] = r;
             min = Math.min(min, sketch[i][r]);
         }
-        return min;
+        int newMin = Integer.MAX_VALUE;
+        for (int i = 0; i < sketch.length; i++) {
+            int r = hashValueCache[i];
+            sketch[i][r] = Math.max(sketch[i][r], min + amount);
+            newMin = Math.min(newMin, sketch[i][r]);
+        }
+
+        return newMin;
     }
 
     @Override

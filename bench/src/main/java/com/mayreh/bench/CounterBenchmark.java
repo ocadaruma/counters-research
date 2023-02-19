@@ -47,6 +47,13 @@ public class CounterBenchmark {
         }
     }
 
+    @Benchmark
+    public void conservativeUpdateCountMin(BenchmarkState state) {
+        for (byte[] data : state.data) {
+            state.cmCuCounter.incrementAndGet(data, 1);
+        }
+    }
+
     @State(Scope.Benchmark)
     public static class BenchmarkState {
         @Param("")
@@ -59,6 +66,7 @@ public class CounterBenchmark {
         private List<byte[]> data;
         private ExactCounter exactCounter;
         private CMCounter cmCounter;
+        private CMCounter cmCuCounter;
 
         @Setup(Level.Trial)
         public void setup() throws Exception {
@@ -70,7 +78,8 @@ public class CounterBenchmark {
                 }
             }
             exactCounter = new ExactCounter();
-            cmCounter = new CMCounter(cmEpsilon, cmDelta);
+            cmCounter = new CMCounter(cmEpsilon, cmDelta, false);
+            cmCuCounter = new CMCounter(cmEpsilon, cmDelta, true);
         }
     }
 
