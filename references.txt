@@ -1,0 +1,24 @@
+- http://www.mi.fu-berlin.de/wiki/pub/Main/GunnarKlauP1winter0708/discMath_klau_hash_II.pdf
+  * Definition of universality
+  * Construction of universal hash functions with proof
+- https://www.cs.purdue.edu/homes/hmaji/teaching/Fall%202017/lectures/14.pdf
+  * Definition of k-wise independence
+  * Proof of 2-wise => universal
+  * Proof of NOT (universal => 2-wise)
+- https://arxiv.org/pdf/0705.4676v6.pdf
+  * 2-wise independent hash family construction by recursive hashing over string
+- https://dsf.berkeley.edu/cs286/papers/countmin-latin2004.pdf
+  * CountMin sketch original paper
+- https://arxiv.org/pdf/1202.4961.pdf
+  * "Moreover, if we have strong universality over L bits, then we also have it over any subset of bits."
+- https://www.cs.bu.edu/faculty/homer/537/talks/SarahAdelBargal_UniversalHashingnotes.pdf
+  * "By proving the above theorem, we are saying that if the universal set of hash function exists, then the elements get evenly distributed in the hash table (on average); desired behavior."
+- https://redirect.cs.umbc.edu/courses/graduate/676/recursivehashingp291-cohen
+  * pairwise independent functions by irreducible polynomial
+  * Also contains SOME MATHEMATICAL DEFINITIONS AND OBSERVATIONS
+- https://github.com/backtrace-labs/umash/blob/master/umash.pdf
+  * umash
+- https://arxiv.org/pdf/2104.08865.pdf
+  * halftime hash
+- https://github.com/lemire/rollinghashcpp/blob/master/generalhash.h
+  * GENERAL reference implementation
