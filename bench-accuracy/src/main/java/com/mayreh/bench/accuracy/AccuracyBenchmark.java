@@ -107,7 +107,7 @@ public class AccuracyBenchmark {
 
         System.out.printf("================================\n");
         System.out.printf("   Keys with error > Nε : %d\n", numKeysExceedErrorBound);
-        System.out.printf("           Conform rate : %f\n", (double)numKeysExceedErrorBound / exactCounter.table().size());
+        System.out.printf("           Conform rate : %f\n", 1 - (double)numKeysExceedErrorBound / exactCounter.table().size());
     }
 
     // Just split input text into words by white space characters
