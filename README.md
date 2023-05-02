@@ -41,23 +41,23 @@ With `ε = 0.00001, δ = 0.00001`, faster than HashMap
 ### counter accuracy
 
 ```
-% java -cp bench-accuracy/build/libs/bench-accuracy-1.0-SNAPSHOT-all.jar com.mayreh.bench.accuracy.AccuracyBenchmark data/simplewiki.xml 0.00001 0.00001                                       master
+% java -cp bench-accuracy/build/libs/bench-accuracy-1.0-SNAPSHOT-all.jar com.mayreh.bench.accuracy.AccuracyBenchmark data/simplewiki.xml 0.00005 0.00001
  Total item count : 112327701
 Unique item count : 11757391
-   CountMin    Nε : 1123.277010
+   CountMin    Nε : 5616.385050
    CountMin   1-δ : 0.999990
    CountMin depth : 12
-   CountMin width : 524288
+   CountMin width : 65536
 ================================
    frequency | num keys  | max error | min error | rmse
-<=    413262 |  11757368 |        70 |         0 |22.306859
-<=    826524 |        14 |        26 |        14 |19.789969
-<=   1239786 |         3 |        27 |        25 |25.683977
-<=   1653048 |         2 |        26 |        13 |20.554805
-<=   2066310 |         1 |        31 |        31 |31.000000
-<=   2479572 |         1 |        15 |        15 |15.000000
-<=   2892834 |         1 |        22 |        22 |22.000000
-<=   4132628 |         1 |        18 |        18 |18.000000
+<=    413262 |  11757368 |       791 |       169 |318.188000
+<=    826524 |        14 |       492 |       258 |331.670447
+<=   1239786 |         3 |       370 |       299 |345.830884
+<=   1653048 |         2 |       315 |       267 |291.988013
+<=   2066310 |         1 |       325 |       325 |325.000000
+<=   2479572 |         1 |       256 |       256 |256.000000
+<=   2892834 |         1 |       367 |       367 |367.000000
+<=   4132628 |         1 |       329 |       329 |329.000000
 ================================
    Keys with error > Nε : 0
            Conform rate : 1.000000
@@ -66,16 +66,16 @@ Unique item count : 11757391
 - conservative update:
 
 ```
-% java -cp bench-accuracy/build/libs/bench-accuracy-1.0-SNAPSHOT-all.jar com.mayreh.bench.accuracy.AccuracyBenchmark data/simplewiki.xml 0.00001 0.00001 --conservative                        master
+% java -cp bench-accuracy/build/libs/bench-accuracy-1.0-SNAPSHOT-all.jar com.mayreh.bench.accuracy.AccuracyBenchmark data/simplewiki.xml 0.00005 0.00001 --conservative
  Total item count : 112327701
 Unique item count : 11757391
-   CountMin    Nε : 1123.277010
+   CountMin    Nε : 5616.385050
    CountMin   1-δ : 0.999990
    CountMin depth : 12
-   CountMin width : 524288
+   CountMin width : 65536
 ================================
    frequency | num keys  | max error | min error | rmse
-<=    413262 |  11757368 |        30 |         0 |9.681790
+<=    413262 |  11757368 |       338 |         0 |144.003644
 <=    826524 |        14 |         0 |         0 |0.000000
 <=   1239786 |         3 |         0 |         0 |0.000000
 <=   1653048 |         2 |         0 |         0 |0.000000
