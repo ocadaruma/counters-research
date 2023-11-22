@@ -6,7 +6,7 @@
 % java -cp bench/build/libs/bench-1.0-SNAPSHOT-all.jar com.mayreh.bench.GenerateData data/uuid.dat 10000000
 ```
 
-## result
+## resul
 
 ### environment
 - MacBook Air (M2, 2022), Memory 24GB, macOS Monterey
